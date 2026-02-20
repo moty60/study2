@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work Notes Study Hub</title>
+  <meta name="description" content="Study website for work notes: workflow + full PDF pages + flashcards + quiz." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-btn" id="btnSidebar" aria-label="Toggle sidebar">
+      <span class="hamburger"></span>
+    </button>
+
+    <div class="brand" role="banner">
+      <div class="brand-mark">📚</div>
+      <div class="brand-text">
+        <div class="brand-title">Work Notes</div>
+        <div class="brand-subtitle">Study Hub</div>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <div class="search-wrap">
+        <input id="searchInput" type="search" placeholder="Search (e.g., HAWB, EMD, Incoterms, DG, AIRRTS)..." autocomplete="off" />
+        <button class="icon-btn" id="btnClearSearch" aria-label="Clear search">✕</button>
+      </div>
+
+      <button class="pill" id="btnExpandAll" title="Expand all accordions">Expand</button>
+      <button class="pill" id="btnCollapseAll" title="Collapse all accordions">Collapse</button>
+      <button class="pill" id="btnStudyMode" title="Toggle Study Mode (focus view)">Study mode</button>
+      <button class="pill" id="btnGlossary" title="Open glossary (g)">Glossary</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
+      <div class="sidebar-inner">
+        <section class="sidebar-section">
+          <h3 class="sidebar-heading">Views</h3>
+          <div class="tabs" id="viewTabs">
+            <button class="tab active" data-view="workflow">Workflow</button>
+            <button class="tab" data-view="pages">All Pages</button>
+            <button class="tab" data-view="flashcards">Flashcards</button>
+            <button class="tab" data-view="quiz">Quiz</button>
+          </div>
+        </section>
+
+        <section class="sidebar-section" id="navSection">
+          <h3 class="sidebar-heading" id="navHeading">Workflow Sections</h3>
+          <div id="nav"></div>
+        </section>
+
+        <section class="sidebar-section">
+          <h3 class="sidebar-heading">Quick Filters</h3>
+          <div class="chips" id="tagChips"></div>
+        </section>
+
+        <section class="sidebar-section">
+          <h3 class="sidebar-heading">Shortcuts</h3>
+          <div class="shortcut"><span>/ Search</span><kbd>/</kbd></div>
+          <div class="shortcut"><span>Glossary</span><kbd>g</kbd></div>
+          <div class="shortcut"><span>Next flashcard</span><kbd>n</kbd></div>
+          <div class="shortcut"><span>Reveal answer</span><kbd>r</kbd></div>
+        </section>
+
+        <section class="sidebar-section">
+          <div class="muted small">Security: credentials are auto-REDACTED in generated data.</div>
+        </section>
+      </div>
+    </aside>
+
+    <section class="content" id="content">
+      <div class="hero">
+        <h1>Study Hub</h1>
+        <p class="lead">
+          Workflow-first study site + full page browser + flashcards + quizzes.
+          Generated locally from your PDF so you get all pages without leaking sensitive info.
+        </p>
+
+        <div class="hero-grid">
+          <div class="stat-card">
+            <div class="stat-num" id="statPages">0</div>
+            <div class="stat-label">Pages loaded</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="statWorkflow">0</div>
+            <div class="stat-label">Workflow items</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="statCards">0</div>
+            <div class="stat-label">Flashcards</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="panelResults">
+        <div class="panel-title">
+          <div id="panelTitle">Workflow</div>
+          <div class="muted small" id="resultsMeta"></div>
+        </div>
+        <div id="results"></div>
+      </div>
+
+      <div class="panel hidden" id="panelFlashcards"></div>
+      <div class="panel hidden" id="panelQuiz"></div>
+
+      <div class="footer">
+        If you publish this online, keep it private (internal workflows + policies).
+      </div>
+    </section>
+  </main>
+
+  <!-- Glossary modal -->
+  <dialog class="modal" id="glossaryModal">
+    <div class="modal-head">
+      <div class="modal-title">Glossary</div>
+      <button class="icon-btn" id="btnCloseGlossary" aria-label="Close glossary">✕</button>
+    </div>
+    <div class="modal-body">
+      <input class="modal-search" id="glossarySearch" type="search" placeholder="Search glossary..." autocomplete="off" />
+      <div class="glossary" id="glossaryList"></div>
+    </div>
+  </dialog>
+
+  <!-- IMPORTANT: scripts load AFTER HTML, and in the right order -->
+  <script defer src="notes-data.js"></script>
+  <script defer src="script.js"></script>
+</body>
+</html>
